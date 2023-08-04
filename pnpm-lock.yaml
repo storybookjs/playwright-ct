@@ -12,13 +12,13 @@ dependencies:
     specifier: ^7.22.5
     version: registry.npmjs.org/@babel/types@7.22.5
   '@storybook/channels':
-    specifier: ^7.2.0
+    specifier: ^7.0.0
     version: registry.npmjs.org/@storybook/channels@7.2.0
   '@storybook/csf':
     specifier: ^0.1.1
     version: registry.npmjs.org/@storybook/csf@0.1.1
   '@storybook/types':
-    specifier: ^7.2.0
+    specifier: ^7.0.0
     version: registry.npmjs.org/@storybook/types@7.2.0
   node-fetch:
     specifier: ^2.0.0

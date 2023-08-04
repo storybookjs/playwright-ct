@@ -1,7 +1,7 @@
 {
   "name": "playwright-ct-storybook",
   "version": "0.0.0",
-  "description": "Playwright Component Testing using Storybook",
+  "description": "Playwright CT powered by Storybook (Experimental)",
   "repository": {
     "type": "git",
     "url": "https://github.com/shilman/playwright-ct-storybook"
@@ -99,9 +99,9 @@
   "dependencies": {
     "@babel/core": "^7.22.9",
     "@babel/types": "^7.22.5",
-    "@storybook/channels": "^7.2.0",
+    "@storybook/channels": "^7.0.0",
     "@storybook/csf": "^0.1.1",
-    "@storybook/types": "^7.2.0",
+    "@storybook/types": "^7.0.0",
     "node-fetch": "^2.0.0",
     "wait-on": "^7.0.1"
   },

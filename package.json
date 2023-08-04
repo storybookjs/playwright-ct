@@ -1,12 +1,12 @@
 {
-  "name": "package-name",
+  "name": "playwright-ct-storybook",
   "version": "0.0.0",
-  "description": "package-description",
+  "description": "Playwright Component Testing using Storybook",
   "repository": {
     "type": "git",
-    "url": "https://github.com/storybookjs/package-base-name"
+    "url": "https://github.com/shilman/playwright-ct-storybook"
   },
-  "author": "package-author",
+  "author": "Michael Shilman <michael@lab80.co>",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -29,13 +29,11 @@
     "prebuild": "yarn clean",
     "build": "tsup",
     "build:watch": "yarn build --watch",
-    "test": "jest",
-    "start": "yarn build:watch",
+    "test": "vitest",
+    "start": "yarn \"build:watch\" \"yarn storybook -- --no-manager-cache --quiet\"",
     "release": "yarn build && auto shipit",
     "lint": "eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.html,.ts,.tsx,.mjs",
     "prettier": "prettier",
-    "prerelease": "node scripts/prepublish-checks.js",
-    "postinstall": "node scripts/welcome-message.js",
     "prepare": "husky install"
   },
   "devDependencies": {
@@ -48,6 +46,7 @@
     "@testing-library/dom": "^8.1.0",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
+    "@types/babel__core": "^7.20.1",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.4.1",
     "auto": "^10.3.0",
@@ -55,8 +54,6 @@
     "concurrently": "^7.0.0",
     "eslint": "^7.32.0",
     "husky": ">=6",
-    "jest": "^27.0.6",
-    "jest-environment-jsdom": "^27.0.6",
     "lint-staged": ">=10",
     "prettier": "^2.3.1",
     "prompts": "^2.4.2",
@@ -64,9 +61,9 @@
     "react-dom": "^17.0.1",
     "rimraf": "^3.0.2",
     "ts-dedent": "^2.2.0",
-    "ts-jest": "^27.0.4",
     "tsup": "^6.7.0",
-    "typescript": "^4.2.4"
+    "typescript": "^5.0.2",
+    "vitest": "^0.34.1"
   },
   "lint-staged": {
     "*.{ts,js,css,md}": "prettier --write"
@@ -79,5 +76,17 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/types": "^7.22.5",
+    "@storybook/channels": "^7.2.0",
+    "@storybook/csf": "^0.1.1",
+    "@storybook/types": "^7.2.0",
+    "node-fetch": "^3.3.2",
+    "wait-on": "^7.0.1"
+  },
+  "peerDependencies": {
+    "@playwright/test": "^1.36.2"
   }
 }

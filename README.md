@@ -156,15 +156,19 @@ Then update your Playwright config to use `playwright-ct-storybook`'s `defineCon
 
 This is a thin wrapper around Playwright's `defineConfig` that tells Playwright to run against your Storybook dev server.
 
-Finally you can write your first test based on your existing stories:
+Then run Playwright to verify the installation so far:
+
+```sh
+npm run playwright test
+```
+
+This will run the example E2E tests that Playwright installs in your project.
+
+Then, you can write your first test based on your existing stories. This test uses `Button.stories` that is included as an example file in the Storybook installation, but it can be any Story file.
 
 ```js
 import { test, expect } from 'playwright-ct-storybook';
 import * as ButtonStories from './Button.stories';
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 test('renders', async ({ mount }) => {
   const button = await mount(ButtonStories.Primary);
@@ -175,10 +179,10 @@ test('renders', async ({ mount }) => {
 To execute the test run:
 
 ```
-npm run playwright
+npm run playwright test
 ```
 
-This will execute the
+This will execute the test you have just written alongside the E2E tests from before.
 
 ## TODO
 

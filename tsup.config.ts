@@ -1,9 +1,9 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig((options) => ({
-  entry: ['src/index.ts'],
+  entry: ['src/index.ts', 'src/ct-test-plugin.ts', 'src/global-setup.ts'],
   splitting: false,
-  minify: !options.watch,
+  // minify: !options.watch,
   format: ['cjs', 'esm'],
   dts: {
     resolve: true,
@@ -11,8 +11,9 @@ export default defineConfig((options) => ({
   treeshake: true,
   sourcemap: true,
   clean: true,
-  platform: 'browser',
+  platform: 'node',
   esbuildOptions(options) {
     options.conditions = ['module'];
   },
+  external: [/\.\/global-setup/],
 }));

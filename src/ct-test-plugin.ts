@@ -1,8 +1,8 @@
-import { resolve } from 'path';
+import { resolve, dirname } from 'path';
 import type * as T from '@babel/types';
 import type { PluginObj, PluginPass } from '@babel/core';
 import { storyNameFromExport, toId } from '@storybook/csf';
-import { lookupTitle } from './global-setup.cjs';
+import { lookupTitle } from './global-setup';
 
 type BabelTypes = typeof T;
 const STORIES_REGEX = /(story|stories)(\..*)?$/;
@@ -74,8 +74,10 @@ export default function (babelContext: { types: BabelTypes }): PluginObj {
               importPath = storyImport.path;
             }
             if (exportName && importPath) {
+              const storyPath = resolve(dirname(state.filename), importPath);
+              const title = lookupTitle(storyPath);
               path.node.arguments[0] = t.stringLiteral(
-                toId(lookupTitle(resolve(importPath)), storyNameFromExport(exportName))
+                toId(title, storyNameFromExport(exportName))
               );
             } else {
               throw new Error(`Could not find story import for ${arg0}`);

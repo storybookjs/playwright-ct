@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { join } from 'path';
 import type {
   Fixtures,
   Locator,
@@ -125,11 +126,13 @@ function wrapFunctions(object: any, page: Page, callbacks: Function[]) {
 
 const defineConfig = (config: PlaywrightTestConfig) =>
   baseDefineConfig({
-    globalSetup: './global-setup.cjs',
+    globalSetup: join(__dirname, 'global-setup.js'),
     ...config,
     build: {
       // @ts-expect-error WTH
-      babelPlugins: [[require.resolve('./ct-test-plugin')]],
+      babelPlugins: [...(config.build?.babelPlugins || []), [join(__dirname, 'ct-test-plugin.js')]],
+      // @ts-expect-error WTH
+      external: [/playwright-ct-storybook\/.*.js$/],
       ...config.build,
     },
     webServer: {

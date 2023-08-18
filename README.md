@@ -20,7 +20,7 @@ CT Storybook allows you to write a Playwright test against that story using all 
 
 ```ts
 // Button.spec.ts
-import { test, expect } from 'playwright-ct-storybook';
+import { test, expect } from '@storybook/playwright-ct';
 import * as ButtonStories from './Button.stories';
 
 test('interacts', async ({ mount }) => {
@@ -144,14 +144,14 @@ npm init playwright@latest
 Then install this package:
 
 ```sh
-npm install playwright-ct-storybook
+npm install @storybook/playwright-ct
 ```
 
-Then update your Playwright config to use `playwright-ct-storybook`'s `defineConfig`:
+Then update your Playwright config to use `@storybook/playwright-ct`'s `defineConfig`:
 
 ```diff
 - import { defineConfig, devices } from '@playwright/test';
-+ import { defineConfig, devices } from 'playwright-ct-storybook';
++ import { defineConfig, devices } from '@storybook/playwright-ct';
 ```
 
 This is a thin wrapper around Playwright's `defineConfig` that tells Playwright to run against your Storybook dev server.
@@ -167,7 +167,7 @@ This will run the example E2E tests that Playwright installs in your project.
 Then, you can write your first test based on your existing stories. This test uses `Button.stories` that is included as an example file in the Storybook installation, but it can be any Story file.
 
 ```js
-import { test, expect } from 'playwright-ct-storybook';
+import { test, expect } from '@storybook/playwright-ct';
 import * as ButtonStories from './Button.stories';
 
 test('renders', async ({ mount }) => {

@@ -1,10 +1,10 @@
 {
-  "name": "playwright-ct-storybook",
+  "name": "@storybook/playwright-ct",
   "version": "0.0.0",
   "description": "Playwright CT powered by Storybook (Experimental)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shilman/playwright-ct-storybook"
+    "url": "https://github.com/storybookjs/playwright-ct"
   },
   "author": "Michael Shilman <michael@lab80.co>",
   "license": "MIT",

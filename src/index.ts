@@ -132,7 +132,7 @@ const defineConfig = (config: PlaywrightTestConfig) =>
       // @ts-expect-error WTH
       babelPlugins: [...(config.build?.babelPlugins || []), [join(__dirname, 'ct-test-plugin.js')]],
       // @ts-expect-error WTH
-      external: [/playwright-ct-storybook\/.*.js$/],
+      external: [/playwright-ct\/.*.js$/],
       ...config.build,
     },
     webServer: {

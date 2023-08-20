@@ -76,12 +76,12 @@ const fixtures: Fixtures<
            */
           const waitForStoryRender = async (updateFn: () => void) =>
             new Promise((resolve, reject) => {
-              channel.on('storyRendered', () => resolve(void 0));
-              channel.on('storyUnchanged', () => resolve(void 0));
-              channel.on('storyErrored', (error) => reject(error));
-              channel.on('storyThrewException', (error) => reject(error));
-              channel.on('playFunctionThrewException', (error) => reject(error));
-              channel.on('storyMissing', (id) => id === storyId && reject(`Missing story ${id}`));
+              channel.once('storyRendered', () => resolve(void 0));
+              channel.once('storyUnchanged', () => resolve(void 0));
+              channel.once('storyErrored', (error) => reject(error));
+              channel.once('storyThrewException', (error) => reject(error));
+              channel.once('playFunctionThrewException', (error) => reject(error));
+              channel.once('storyMissing', (id) => id === storyId && reject(`Missing story ${id}`));
               updateFn();
             });
 

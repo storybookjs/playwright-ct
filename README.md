@@ -186,7 +186,6 @@ This will execute the test you have just written alongside the E2E tests from be
 
 ## TODO
 
-- [ ] Dev server URL is hard-coded
 - [ ] `beforeMount` / `afterMount` hooks unimplemented
 - [ ] How to use this alongside play function
 - [ ] How to use this alongside Playwright E2E

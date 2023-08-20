@@ -66,18 +66,23 @@ const fixtures: Fixtures<
       if (args) wrapFunctions(args, page, boundCallbacksForMount);
 
       if (typeof storyId !== 'string') return {} as MountResult;
-      await page.goto('http://localhost:6006/iframe.html?id=' + storyId);
+      await page.goto('http://localhost:6006/iframe.html');
       await page.evaluate(
         async ({ storyId, args }) => {
           const channel = __STORYBOOK_ADDONS_CHANNEL__;
-          const waitForStory = () =>
+          /**
+           * Perform a function that updates the story store and wait for the story to render
+           * or error
+           */
+          const waitForStoryRender = async (updateFn: () => void) =>
             new Promise((resolve, reject) => {
-              channel.on('storyRendered', () => resolve(void 0));
-              channel.on('storyUnchanged', () => resolve(void 0));
-              channel.on('storyErrored', (error) => reject(error));
-              channel.on('storyThrewException', (error) => reject(error));
-              channel.on('playFunctionThrewException', (error) => reject(error));
-              channel.on('storyMissing', (id) => id === storyId && reject(`Missing story ${id}`));
+              channel.once('storyRendered', () => resolve(void 0));
+              channel.once('storyUnchanged', () => resolve(void 0));
+              channel.once('storyErrored', (error) => reject(error));
+              channel.once('storyThrewException', (error) => reject(error));
+              channel.once('playFunctionThrewException', (error) => reject(error));
+              channel.once('storyMissing', (id) => id === storyId && reject(`Missing story ${id}`));
+              updateFn();
             });
 
           const unwrapFunctions = (object: any) => {
@@ -93,15 +98,18 @@ const fixtures: Fixtures<
             }
           };
 
-          await waitForStory();
+          await waitForStoryRender(() =>
+            channel.emit('setCurrentStory', { storyId, viewMode: 'story' })
+          );
           if (args) {
             unwrapFunctions(args);
             const updatedArgs = args;
-            channel.emit('updateStoryArgs', {
-              storyId,
-              updatedArgs,
+            await waitForStoryRender(() => {
+              channel.emit('updateStoryArgs', {
+                storyId,
+                updatedArgs,
+              });
             });
-            await waitForStory();
           }
         },
         { storyId, args }

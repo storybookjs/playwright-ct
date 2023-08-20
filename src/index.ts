@@ -60,13 +60,20 @@ const fixtures: Fixtures<
     await use(page);
   },
 
-  mount: async ({ page }, use) => {
+  mount: async ({ page }, use, info) => {
     await use(async (storyId: StoryOrExport, args?: Args) => {
       boundCallbacksForMount = [];
       if (args) wrapFunctions(args, page, boundCallbacksForMount);
 
       if (typeof storyId !== 'string') return {} as MountResult;
-      await page.goto('http://localhost:6006/iframe.html?id=' + storyId);
+
+      const config = (info as any)._configInternal.config as PlaywrightTestConfig;
+      if (!config?.webServer) throw new Error('webServer config is missing');
+      const server = Array.isArray(config.webServer) ? config.webServer[0] : config.webServer;
+      const url = server.url || `http://localhost:${server.port}`;
+
+      await page.goto(join(url, 'iframe.html'));
+
       await page.evaluate(
         async ({ storyId, args }) => {
           const channel = __STORYBOOK_ADDONS_CHANNEL__;
@@ -137,7 +144,7 @@ const defineConfig = (config: PlaywrightTestConfig) =>
     },
     webServer: {
       command: 'npm run storybook',
-      url: 'http://127.0.0.1:6006',
+      url: 'http://localhost:6006',
       reuseExistingServer: true,
       ...config.webServer,
     },

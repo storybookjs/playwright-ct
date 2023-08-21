@@ -16,7 +16,7 @@ export default { component: Button };
 export const Primary = { args: { label: 'Button', primary: true } };
 ```
 
-CT Storybook allows you to write a Playwright test against that story using all of the Playwright's features:
+CT Storybook allows you to write a Playwright test against that story using all of Playwright's features:
 
 ```ts
 // Button.spec.ts
@@ -87,7 +87,7 @@ You should consider using Playwright CT Storybook over Playwright CT if:
 - You're using a renderer that is not supported by Playwright CT (e.g. Angular)
 - You're hitting up against any of the limitations of CT (e.g. test imports)
 
-## Comparison to Storybook CT
+## Comparison to Storybook Test Runner
 
 Storybook also provides component testing with its [Test Runner](https://storybook.js.org/docs/react/writing-tests/test-runner) (that also uses Playwright under the hood).
 
@@ -111,7 +111,7 @@ export const Interaction {
 }
 ```
 
-| Storybook CT                             | Playwright CT Storybook                         |
+| Storybook Test Runner                    | Playwright CT Storybook                         |
 | ---------------------------------------- | ----------------------------------------------- |
 | Tests run in the browser                 | Tests run in node                               |
 | Runs play function                       | Runs play function if present AND test function |
@@ -120,9 +120,9 @@ export const Interaction {
 | Interact using Testing Library           | Interact using all of Playwright facilities     |
 | Compatible with Chromatic & SB ecosystem | Incompatible                                    |
 
-The main difference between Storybook CT and Playwright CT is that Storybook's play functions are entirely browser-based. This means that you can publish and inspect your tests in a static build of Storybook in the cloud, which is great for collaboration debugging CI failures. The drawback of this approach is that some of Playwright's features, such as the ability to wait for network idle, are not unavailble in "user-land" browser code.
+The main difference between Storybook Test Runner and Playwright CT is that Storybook's play functions are entirely browser-based. This means that you can publish and inspect your tests in a static build of Storybook in the cloud, which is great for collaboration debugging CI failures. The drawback of this approach is that some of Playwright's features, such as the ability to wait for network idle, are not unavailble in "user-land" browser code.
 
-You should use Playwright CT Storybook over Storybook CT if:
+You should use Playwright CT Storybook over Storybook Test Runner if:
 
 - You prefer Playwright's test syntax
 - You prefer Playwright's workflow (UI, debugger, etc)

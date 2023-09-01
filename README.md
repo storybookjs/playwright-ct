@@ -1,3 +1,5 @@
+> **Archiving this project based on [feedback from the Playwright team](https://github.com/microsoft/playwright/pull/26592). This code is still functional/usable, and we will resurrect if there is ever a chance for deeper collaboration in the future.**
+
 # Playwright CT Storybook
 
 Test Storybook-rendered components in isolation using `@playwright/test`.
